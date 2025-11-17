@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магістерська робота - Кузьмяк Богдан</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0 5px;
+        }
+        
+        .lang-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        header {
+            background: white;
+            padding: 50px 60px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 100%;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .student-info {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 15px;
+        }
+        
+        .student-info strong { color: #764ba2; }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover { transform: translateY(-10px); }
+        
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .card h3 {
+            color: #764ba2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .card ul { list-style: none; padding: 0; }
+        
+        .card ul li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .card ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .full-width { grid-column: 1 / -1; }
+        
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .content-grid { grid-template-columns: 1fr; }
+            .card .three-columns { grid-template-columns: 1fr !important; }
+        }
+        
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLang('uk')">УКР</button>
+        <button class="lang-btn" onclick="switchLang('en')">ENG</button>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 id="title">Математичне та програмне забезпечення для оптимізації параметрів сходів у житлових приміщеннях</h1>
+            <div class="student-info">
+                <p><strong id="author-label">Виконавець:</strong> Кузьмяк Богдан</p>
+                <p><strong id="group-label">Група:</strong> ІПЗМПм-11</p>
+                <p><strong id="level-label">Рівень:</strong> <span id="level-text">Магістерська робота</span></p>
+            </div>
+        </header>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2><span id="goal-title">🎯 Мета роботи</span></h2>
+                <p id="goal-text">Розробка математичного та програмного забезпечення для автоматизованого розрахунку та оптимізації геометричних параметрів сходів у житлових приміщеннях з урахуванням будівельних норм та ергономічних вимог.</p>
+            </div>
+
+            <div class="card">
+                <h2><span id="tasks-title">📋 Основні завдання</span></h2>
+                <ul id="tasks-list">
+                    <li>Аналіз існуючих методів проектування сходів</li>
+                    <li>Розробка математичної моделі оптимізації</li>
+                    <li>Створення алгоритмів розрахунку параметрів</li>
+                    <li>Реалізація програмного забезпечення</li>
+                    <li>Тестування та валідація результатів</li>
+                </ul>
+            </div>
+
+            <div class="card full-width">
+                <h2><span id="relevance-title">🔬 Актуальність дослідження</span></h2>
+                <p id="relevance-text">Проектування сходів є важливим етапом будівництва житлових приміщень. Правильно розраховані параметри сходів забезпечують:</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px;">
+                    <div>
+                        <h3 id="safety-title">Безпеку</h3>
+                        <ul id="safety-list">
+                            <li>Зменшення ризику травматизму</li>
+                            <li>Відповідність будівельним нормам</li>
+                            <li>Комфортне користування</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 id="ergonomics-title">Ергономічність</h3>
+                        <ul id="ergonomics-list">
+                            <li>Оптимальний кут нахилу</li>
+                            <li>Зручна висота сходинок</li>
+                            <li>Правильна ширина проступу</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 id="economy-title">Економічність</h3>
+                        <ul id="economy-list">
+                            <li>Раціональне використання простору</li>
+                            <li>Оптимізація матеріалів</li>
+                            <li>Зниження вартості будівництва</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span id="methodology-title">⚙️ Методологія</span></h2>
+                <ul id="methodology-list">
+                    <li>Математичне моделювання</li>
+                    <li>Методи оптимізації</li>
+                    <li>Аналіз будівельних норм ДБН</li>
+                    <li>Об'єктно-орієнтоване програмування</li>
+                    <li>Тестування програмного забезпечення</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span id="tech-title">💻 Технології</span></h2>
+                <ul id="tech-list">
+                    <li>Математичні бібліотеки</li>
+                    <li>Графічний інтерфейс користувача</li>
+                    <li>Системи контролю версій</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h2 id="results-title">🚀 Очікувані результати</h2>
+            <p id="results-text">Розроблене програмне забезпечення дозволить архітекторам та проектувальникам швидко та точно розраховувати оптимальні параметри сходів, що відповідають всім будівельним нормам та забезпечують максимальну безпеку і комфорт користувачів.</p>
+            <a href="#" class="btn" id="details-btn">Детальніше про проєкт</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 ЗУНУ | Кузьмяк Богдан | <span id="footer-thesis">Магістерська робота</span> | Група ІПЗМПм-11</p>
+        </footer>
+    </div>
+
+    <script>
+        var translations = {
+            uk: {
+                title: "Математичне та програмне забезпечення для оптимізації параметрів сходів у житлових приміщеннях",
+                authorLabel: "Виконавець:",
+                groupLabel: "Група:",
+                levelLabel: "Рівень:",
+                levelText: "Магістерська робота",
+                goalTitle: "🎯 Мета роботи",
+                goalText: "Розробка математичного та програмного забезпечення для автоматизованого розрахунку та оптимізації геометричних параметрів сходів у житлових приміщеннях з урахуванням будівельних норм та ергономічних вимог.",
+                tasksTitle: "📋 Основні завдання",
+                tasksList: [
+                    "Аналіз існуючих методів проектування сходів",
+                    "Розробка математичної моделі оптимізації",
+                    "Створення алгоритмів розрахунку параметрів",
+                    "Реалізація програмного забезпечення",
+                    "Тестування та валідація результатів"
+                ],
+                relevanceTitle: "🔬 Актуальність дослідження",
+                relevanceText: "Проектування сходів є важливим етапом будівництва житлових приміщень. Правильно розраховані параметри сходів забезпечують:",
+                safetyTitle: "Безпеку",
+                safetyList: [
+                    "Зменшення ризику травматизму",
+                    "Відповідність будівельним нормам",
+                    "Комфортне користування"
+                ],
+                ergonomicsTitle: "Ергономічність",
+                ergonomicsList: [
+                    "Оптимальний кут нахилу",
+                    "Зручна висота сходинок",
+                    "Правильна ширина проступу"
+                ],
+                economyTitle: "Економічність",
+                economyList: [
+                    "Раціональне використання простору",
+                    "Оптимізація матеріалів",
+                    "Зниження вартості будівництва"
+                ],
+                methodologyTitle: "⚙️ Методологія",
+                methodologyList: [
+                    "Математичне моделювання",
+                    "Методи оптимізації",
+                    "Аналіз будівельних норм ДБН",
+                    "Об'єктно-орієнтоване програмування",
+                    "Тестування програмного забезпечення"
+                ],
+                techTitle: "💻 Технології",
+                techList: [
+                    "Математичні бібліотеки",
+                    "Графічний інтерфейс користувача",
+                    "Системи контролю версій"
+                ],
+                resultsTitle: "🚀 Очікувані результати",
+                resultsText: "Розроблене програмне забезпечення дозволить архітекторам та проектувальникам швидко та точно розраховувати оптимальні параметри сходів, що відповідають всім будівельним нормам та забезпечують максимальну безпеку і комфорт користувачів.",
+                detailsBtn: "Детальніше про проєкт",
+                footerThesis: "Магістерська робота"
+            },
+            en: {
+                title: "Mathematical and Software Support for Optimizing Staircase Parameters in Residential Premises",
+                authorLabel: "Author:",
+                groupLabel: "Group:",
+                levelLabel: "Level:",
+                levelText: "Master's Thesis",
+                goalTitle: "🎯 Research Goal",
+                goalText: "Development of mathematical and software support for automated calculation and optimization of geometric staircase parameters in residential premises, taking into account building codes and ergonomic requirements.",
+                tasksTitle: "📋 Main Tasks",
+                tasksList: [
+                    "Analysis of existing staircase design methods",
+                    "Development of mathematical optimization model",
+                    "Creation of parameter calculation algorithms",
+                    "Software implementation",
+                    "Testing and validation of results"
+                ],
+                relevanceTitle: "🔬 Research Relevance",
+                relevanceText: "Staircase design is an important stage in residential construction. Properly calculated staircase parameters ensure:",
+                safetyTitle: "Safety",
+                safetyList: [
+                    "Reduced risk of injury",
+                    "Compliance with building codes",
+                    "Comfortable usage"
+                ],
+                ergonomicsTitle: "Ergonomics",
+                ergonomicsList: [
+                    "Optimal slope angle",
+                    "Convenient step height",
+                    "Proper tread width"
+                ],
+                economyTitle: "Economy",
+                economyList: [
+                    "Rational use of space",
+                    "Material optimization",
+                    "Reduced construction costs"
+                ],
+                methodologyTitle: "⚙️ Methodology",
+                methodologyList: [
+                    "Mathematical modeling",
+                    "Optimization methods",
+                    "Analysis of DBN building codes",
+                    "Object-oriented programming",
+                    "Software testing"
+                ],
+                techTitle: "💻 Technologies",
+                techList: [
+                    "Mathematical libraries",
+                    "Graphical user interface",
+                    "Version control systems"
+                ],
+                resultsTitle: "🚀 Expected Results",
+                resultsText: "The developed software will allow architects and designers to quickly and accurately calculate optimal staircase parameters that comply with all building codes and ensure maximum safety and user comfort.",
+                detailsBtn: "More about the project",
+                footerThesis: "Master's Thesis"
+            }
+        };
+
+        function updateList(id, items) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.innerHTML = items.map(function(item) {
+                    return '<li>' + item + '</li>';
+                }).join('');
+            }
+        }
+
+        function switchLang(lang) {
+            var t = translations[lang];
+            
+            document.getElementById('title').textContent = t.title;
+            document.getElementById('author-label').textContent = t.authorLabel;
+            document.getElementById('group-label').textContent = t.groupLabel;
+            document.getElementById('level-label').textContent = t.levelLabel;
+            document.getElementById('level-text').textContent = t.levelText;
+            document.getElementById('goal-title').innerHTML = t.goalTitle;
+            document.getElementById('goal-text').textContent = t.goalText;
+            document.getElementById('tasks-title').innerHTML = t.tasksTitle;
+            updateList('tasks-list', t.tasksList);
+            document.getElementById('relevance-title').innerHTML = t.relevanceTitle;
+            document.getElementById('relevance-text').textContent = t.relevanceText;
+            document.getElementById('safety-title').textContent = t.safetyTitle;
+            updateList('safety-list', t.safetyList);
+            document.getElementById('ergonomics-title').textContent = t.ergonomicsTitle;
+            updateList('ergonomics-list', t.ergonomicsList);
+            document.getElementById('economy-title').textContent = t.economyTitle;
+            updateList('economy-list', t.economyList);
+            document.getElementById('methodology-title').innerHTML = t.methodologyTitle;
+            updateList('methodology-list', t.methodologyList);
+            document.getElementById('tech-title').innerHTML = t.techTitle;
+            updateList('tech-list', t.techList);
+            document.getElementById('results-title').textContent = t.resultsTitle;
+            document.getElementById('results-text').textContent = t.resultsText;
+            document.getElementById('details-btn').textContent = t.detailsBtn;
+            document.getElementById('footer-thesis').textContent = t.footerThesis;
+
+            var btns = document.querySelectorAll('.lang-btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('active');
+            }
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
